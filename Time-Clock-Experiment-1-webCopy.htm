@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Time Punch Card Clock</title>
+  </head>
+  <body>
+    <button onclick="punch('Air')">Air</button>
+    <button onclick="punch('Water')">Water</button>
+    <button onclick="punch('Earth')">Earth</button>
+    <button onclick="punch('Earth2')">Earth 2</button>
+    <button onclick="punch('Fire')">Fire</button>
+    <button onclick="punch('FancyFire')">Fancy Fire</button>
+    <button onclick="punch('Native')">Native</button>
+    <br><br>
+    <div id="punch-list"></div>
+    <script>
+      function punch(buttonName) {
+        // Get the current date and time
+        var now = new Date();
+        
+        // Format the date and time as a string
+        var timestamp = now.toLocaleString();
+        
+        // Get the existing punch list from local storage or create an empty array if none exists
+        var punches = JSON.parse(localStorage.getItem('punches') || '[]');
+        
+        // Add the new punch to the list
+        punches.push({ button: buttonName, timestamp: timestamp });
+        
+        // Save the updated punch list to local storage
+        localStorage.setItem('punches', JSON.stringify(punches));
+        
+        // Display the punch list in chronological order
+        var punchList = document.getElementById("punch-list");
+        punchList.innerHTML = "";
+        punches.sort(function(a, b) {
+          return new Date(a.timestamp) - new Date(b.timestamp);
+        }).forEach(function(punch) {
+          var punchElement = document.createElement("p");
+          punchElement.textContent = punch.button + " - " + punch.timestamp;
+          punchList.appendChild(punchElement);
+        });
+      }
+		function showData() {
+  // Read the stored data from local storage
+  var data = JSON.parse(localStorage.getItem("punchData"));
+
+  // Loop through the data and display it in a table
+  newWindow.document.write("<table><tr><th>Button Name</th><th>Timestamp</th></tr>");
+  for (var i = 0; i < data.length; i++) {
+    newWindow.document.write("<tr><td>" + data[i].buttonName + "</td><td>" + data[i].timestamp + "</td></tr>");
+  }
+  newWindow.document.write("</table></body></html>");
+}
+
+    </script>
+  </body>
+</html>
