@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Time Punch Card Clock</title>
+  </head>
+  <body>
+    <button onclick="punch()">Punch the Clock</button>
+    <br><br>
+    <div id="timestamps"></div>
+    <script>
+      function punch() {
+        // Get the current date and time
+        var now = new Date();
+        
+        // Format the date and time as a string
+        var timestamp = now.toLocaleString();
+        
+        // Create a new HTML element for the timestamp
+        var timestampElement = document.createElement("p");
+        timestampElement.textContent = timestamp;
+        
+        // Append the timestamp element to the document
+        document.getElementById("timestamps").appendChild(timestampElement);
+      }
+    </script>
+  </body>
+</html>
